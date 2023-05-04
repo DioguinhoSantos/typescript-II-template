@@ -1,31 +1,50 @@
-/* PRÁTICA GUIADA - Parte 1
-Crie um sistema de cadastro de usuários que contenha:
+type TPerson = {
+    id: string;
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+}
 
-1. Type Alias para uma pessoa (TPerson) com as propriedades id, name, email, password e role;
-2. Type Aliases para 2 contas (AdminAccount, NormalAccount) com as propriedades account e permission;
-3. Crie exemplos de usuários Admin e Normal;
-*/
+type TAdminAccount = {
+    account: string;
+    permission: boolean;
+}
 
+type TNormalAccount = {
+    account: string;
+    permission: boolean;
+}
 
+enum ROLE {
+    ADMIN = 'Admin',
+    NORMAL = 'Normal'
+}
 
+type UserInfo = TPerson & TAdminAccount | TPerson & TNormalAccount
 
+const pessoa1: UserInfo = {
+    id: '001',
+    name: 'Diogo',
+    email: 'diogo@gmail.com',
+    password: '123',
+    role: ROLE.ADMIN,
+    account: 'corrent',
+    permission: true
+}
 
+const pessoa2: UserInfo = {
+    id: '002',
+    name: 'Coliro',
+    email: 'coliro@gmail.com',
+    password: '123',
+    role: ROLE.NORMAL,
+    account: 'corrent',
+    permission: false
+}
 
+const users: UserInfo[] = [];
 
+users.push(pessoa1, pessoa2);
 
-
-
-
-
-
-
-
-
-/* PRÁTICA GUIADA - Parte 2
-Vamos continuar nosso sistema de cadastro de usuários criando:
-
-1. Enum com valores ADMIN e NORMAL e atribua ã propriedade role do Tperson;
-2. Tipo Intersection unindo: pessoa(Person) + permissão (Role);
-3. Um array de usuários que permite guardar apenas usuários do tipo Person + Role;
-
-*/ 
+console.table(users);
